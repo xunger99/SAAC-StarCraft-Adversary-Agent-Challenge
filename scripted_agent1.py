@@ -1,3 +1,13 @@
+#---------------------------- 
+# The environment for 1 vs 1 with 2 agents, one is scripted and the other is from DQN. 
+#
+# This code is only for research purpose.   
+# The code is developed based on the sc2_env from pysc2.
+# Modications: include FindAndDefeatZergling_1 to _3 classes, and _3 is the script used to visit the whole map.   
+#     
+#  Xun Huang, Jul 29, 2021
+#---------------------------- 
+
 # Copyright 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -87,11 +97,11 @@ class FindAndDefeatZergling_2(base_agent.BaseAgent):
 
 
 # V3, scripted attacking with improved performance. Xun, Jun 18, 2021
-# Here the marines do a large Z route, for defeating zergling
+# Here the marines do a large Z route. 
 class FindAndDefeatZergling_3(base_agent.BaseAgent):
   """An agent is developed from CollectMineralShardsFeatureUnits class. 
   """
-  id=0
+  id=0    
   def setup(self, obs_spec, action_spec):
     super(FindAndDefeatZergling_3, self).setup(obs_spec, action_spec)
     #pdb.set_trace()
@@ -101,12 +111,9 @@ class FindAndDefeatZergling_3(base_agent.BaseAgent):
     #self.coords=[(26,25),(32,0),(0,32),(32,32)]  
     #self.coords=[(5,10),(26,10),(5,25),(26,25)]      #self.coords=[(4.9,9.9),(15,9.9),(5,17),(15,17),(5,25),(15,25),(15,10),(26,10),(15,17),(26,17),(15,25),(26,25)] 
     # Obtain the following coordinates by testing, xun
-    self.coords=[(4.9,10.5),(26,14.2),(4.9,18.5),(26.1,19.5),(4.9,22.5),(25,25), (26.1,9.9)] 
-#    self.coords=[(4.8,10.5),(26,14.2),(4.9,18.5),(26.1,19.5),(4.8,22.5),(25,25), (26.1,9.9)] 
-    #self.coords=[(5,10),(26,10),(26,19),(5,19),(5,25),(26,25), (5,10)] 
+    #self.coords=[(4.9,10.5),(26,14.2),(4.9,18.5),(26.1,19.5),(4.9,22.5),(25,25), (26.1,9.9)] 
+    self.coords=[(5,10),(26,10),(26,19),(5,19),(5,25),(26,25), (5,10)] 
     #self.coords=[(14,16),(50,16),(50,28),(14,28),(14,40),(50,40), (14,16)] 
-    
-    
     self.xmean_old = 0  
     self.ymean_old = 0     
     
@@ -121,7 +128,7 @@ class FindAndDefeatZergling_3(base_agent.BaseAgent):
   def step(self, obs):
     super(FindAndDefeatZergling_3, self).step(obs)
     
-    #pdb.set_trace()
+    
     #obs.observation['raw_units'] 
     real_action  = FUNCTIONS.no_op()
     real_action1 = FUNCTIONS.no_op()
@@ -129,6 +136,7 @@ class FindAndDefeatZergling_3(base_agent.BaseAgent):
     player_y, player_x = (obs.observation.feature_minimap.player_relative == features.PlayerRelative.SELF).nonzero() 
     xmean=player_x.mean()
     ymean=player_y.mean()
+    #pdb.set_trace()
     #real_action1 = FUNCTIONS.move_camera((xmean, ymean))
     
     #pdb.set_trace()
@@ -142,8 +150,8 @@ class FindAndDefeatZergling_3(base_agent.BaseAgent):
         
     # Find the distance to the taeget position    
     distances = numpy.linalg.norm(numpy.array([xmean,ymean]) - numpy.array(self.coords[self.id]))    
-#    if self.id == 1: 
-#        print('distances: ', distances, ', xmean:', xmean, ', ymean:', ymean, ', coords:', self.coords[self.id])
+    #if self.id == 1: 
+    #    print('distances: ', distances, ', xmean:', xmean, ', ymean:', ymean, ', coords:', self.coords[self.id])
         #pdb.set_trace()
 
     if abs(distances) < 3: # 2 is a prescribed value, less than which we can say the target position is arrived
@@ -155,78 +163,6 @@ class FindAndDefeatZergling_3(base_agent.BaseAgent):
     real_action = [real_action, real_action1]
     return real_action 
 
-
-
-
-
-
-# V4, scripted attacking with improved performance. Xun, Jun 18, 2021
-# Here the void-ray conduct  a simple route because its sight range is larger. 
-class FindAndDefeatZergling_4(base_agent.BaseAgent):
-  """An agent is developed from CollectMineralShardsFeatureUnits class. 
-  """
-  id=0
-  def setup(self, obs_spec, action_spec):
-    super(FindAndDefeatZergling_4, self).setup(obs_spec, action_spec)
-    #pdb.set_trace()
-    if "feature_units" not in obs_spec:
-      raise Exception("This agent requires the feature_units observation.")
-
-    #self.coords=[(26,25),(32,0),(0,32),(32,32)]  
-    #self.coords=[(5,10),(26,10),(5,25),(26,25)]      #self.coords=[(4.9,9.9),(15,9.9),(5,17),(15,17),(5,25),(15,25),(15,10),(26,10),(15,17),(26,17),(15,25),(26,25)] 
-    # Obtain the following coordinates by testing, xun
-    #self.coords=[(4.9,10.5),(26,14.2),(4.9,18.5),(26.1,19.5),(4.9,22.5),(25,25), (26.1,9.9)] 
-    #self.coords=[(5,12),(26,10),(26,19),(5,19),(5,25),(26,25), (5,10)] 
-    self.coords=[(5,12),(25,13),(26,19),(5,17),(5,24),(26,25),(26,19),(5,12)] 
-    #self.coords=[(14,16),(50,16),(50,28),(14,28),(14,40),(50,40), (14,16)] 
-    
-    self.xmean_old = 0  
-    self.ymean_old = 0     
-    
-  def reset(self):
-    super(FindAndDefeatZergling_4, self).reset()
-    self._marine_selected = False
-    self._previous_mineral_xy = [-1, -1]
-    self.id = 0   # trace the settled points
-    self.xmean_old = 0  
-    self.ymean_old = 0   
-
-  def step(self, obs):
-    super(FindAndDefeatZergling_4, self).step(obs)
-    
-    #pdb.set_trace()
-    #obs.observation['raw_units'] 
-    real_action  = FUNCTIONS.no_op()
-    real_action1 = FUNCTIONS.no_op()
-    
-    player_y, player_x = (obs.observation.feature_minimap.player_relative == features.PlayerRelative.SELF).nonzero() 
-    xmean=player_x.mean()
-    ymean=player_y.mean()
-    #real_action1 = FUNCTIONS.move_camera((xmean, ymean))
-    
-    #pdb.set_trace()
-    real_action1 = FUNCTIONS.move_camera(self.coords[self.id])
-    if FUNCTIONS.Attack_screen.id in obs.observation.available_actions:  
-        real_action = FUNCTIONS.Attack_screen("now", self.coords[self.id])
-    else:
-        if FUNCTIONS.Move_screen.id in obs.observation.available_actions:
-            real_action = FUNCTIONS.Move_screen("now", self.coords[self.id])
-                  
-        
-    # Find the distance to the taeget position    
-    distances = numpy.linalg.norm(numpy.array([xmean,ymean]) - numpy.array(self.coords[self.id]))    
-#    if self.id == 1: 
-#        print('distances: ', distances, ', xmean:', xmean, ', ymean:', ymean, ', coords:', self.coords[self.id])
-        #pdb.set_trace()
-
-    if abs(distances) < 3: # 2 is a prescribed value, less than which we can say the target position is arrived
-        self.id += 1
-        self.id = self.id%8    # here I only define 4 corners. xun
-        #pdb.set_trace()
-    
-    
-    real_action = [real_action, real_action1]
-    return real_action 
 
 
 
