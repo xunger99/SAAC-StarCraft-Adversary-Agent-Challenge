@@ -564,8 +564,8 @@ class SC2Env_xun(environment.Base):
                        for c, a in zip(self._controllers, actions))
     
     
-    if self._episode_count >11:
-        pdb.set_trace()                  
+#    if self._episode_count >11:
+#        pdb.set_trace()                  
 
     self._state = environment.StepType.MID
     return self._step(step_mul)
