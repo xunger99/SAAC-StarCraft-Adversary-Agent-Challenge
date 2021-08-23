@@ -10,6 +10,17 @@ A reinforcement learning environment with adversary agents is proposed in this w
 
 
 
+Installation steps: 
+1. conda, (python 2.8)
+2. pip tensorflow-gpu 
+3. keras
+4. PySC2
+5. baseline 
+6. battle.net + download maps 
+7. Download files from this folder
+The above steps have been tested on Mac OSX/Windows 10/Ubuntu platforms. 
+
+
 Code issues: 
 It is well known in the StarCraft programming community that the current PySC2 interface could produce websocket errors during the low-level message passing between multiple agent interfaces. To bypass this issue, a thorough programming debug has been conducted in this work to identify the corresponding code. Then, a temporary fix has been adopted to rectify the issue before any official fix is available from DeepMind in the near future. 
 
