@@ -1,7 +1,7 @@
 # SAAC-StarCraft-Adversary-Agent-Challenge
 
 # Paper 
-A draft that explains the detailed design of the code is arXiv:submit/3894432, "Adversary-Agent Reinforcement Learning for Pursuit–Evasion" by Prof. Xun Huang, Aug 2021. Please cite the reference if the code has been used in your work. 
+A draft that explains the detailed design of the code is arXiv:submit/3894432 (https://arxiv.org/submit/3894432/view), "Adversary-Agent Reinforcement Learning for Pursuit–Evasion" by Prof. Xun Huang, Aug 2021. If you have used this code in your research work, please cite the paper. 
 
 
 
