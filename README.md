@@ -11,15 +11,24 @@ A reinforcement learning environment with adversary agents is proposed in this w
 
 
 # Installation steps: 
-1. conda, (python 2.8)
-2. pip tensorflow-gpu 
-3. keras
-4. PySC2
-5. baseline 
+1. conda, (python 2.8, 2.7, 2.6 all work)
+2. pip tensorflow-gpu (2.5.0, without GPU is OK too)
+3. keras (2.4.3)
+4. PySC2 (3.0.0)
+5. baselines (0.1.6) 
 6. battle.net + download maps 
 7. Download files from this folder
-The above steps have been tested on Mac OSX/Windows 10/Ubuntu platforms. 
+* The above steps have been tested on Mac OSX/Windows 10/Ubuntu platforms. If you met installation problems, please google solutions. 
+** Currrntly, I provide three tests and two mini-game maps. 
+Map 1: FindAndDefeatDrones.SC2Map, single-player game. Please copy this file to the mini_games folder of the StarCtaft installation folder on your computer.  
+Map 2: FindAndDefeatDronesAA.SC2Map, double-player game. Please copy this file to the melee folder of the StarCtaft installation folder on your computer. 
+Then open the files mini_games.py and melee.py on your pysc2/maps folder, include the names of these two games therein. Then, the SC2 env will be adble to load the new games. 
+*** You can edit these two games by map editor, and follow the above steps to run your own games. 
 
+# Running cases:
+1. python TestScripted_V1.py
+2. python TestScripted_V2.py
+3. python exec_2agents.py
 
 # Code issues: 
 It is well known in the StarCraft programming community that the current PySC2 interface could produce websocket errors during the low-level message passing between multiple agent interfaces. To bypass this issue, a thorough programming debug has been conducted in this work to identify the corresponding code. Then, a temporary fix has been adopted to rectify the issue before any official fix is available from DeepMind in the near future. 
