@@ -51,7 +51,7 @@ from pysc2.lib import stopwatch
 
 # MiniGame 1: MoveToBeacon
 # MiniGame 2: CollectMineralShards
-_ENV_NAME = "FindAndDefeatZerglings4" #"PursuitEvasion1" #"FindAndDefeatZerglings"
+_ENV_NAME = "FindAndDefeatDronesAA" #"PursuitEvasion1" #"FindAndDefeatZerglings"
 _SCREEN = 32
 _MINIMAP = 16
 
