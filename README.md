@@ -27,10 +27,16 @@ Map 2: FindAndDefeatDronesAA.SC2Map, double-player game. Please copy this file t
 2. Then, open the files mini_games.py and melee.py on your pysc2/maps folder, include the names of these two games therein. Then, the SC2 env will be adble to load the new games. 
 3. You can edit these two games by map editor, and follow the above steps to run your own games. 
 
+
 # Running cases:
-1. python TestScripted_V1.py
-2. python TestScripted_V2.py
-3. python exec_2agents.py
+1. python TestScripted_V1.py:
+Running the classical FindAndDefeatZergling mini-game, fog of war is deactivated (only for readers/users to gain a better understanding of what is going on), and the pursuit agent is from my script, where the traversal coordinates are obtained through a former learning. It can be seen that the mean score achieved is around 40, which already beats a couple of AI agents from other works.   
+
+2. python TestScripted_V2.py: 
+Running the new FindAndDefeatDrone mini-game, to test the game/unit set-ups are OK. 
+
+3. python exec_2agents.py: 
+This is to run the mini-game that supports two agents/interfaces. 
 
 # Code issues: 
 It is well known in the StarCraft programming community that the current PySC2 interface could produce websocket errors during the low-level message passing between multiple agent interfaces. To bypass this issue, a thorough programming debug has been conducted in this work to identify the corresponding code. Then, a temporary fix has been adopted to rectify the issue before any official fix is available from DeepMind in the near future. 
