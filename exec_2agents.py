@@ -62,7 +62,7 @@ _profile=True
 
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string("agent", "scripted_agent1.FindAndDefeatZergling_3",  
+flags.DEFINE_string("agent", "scripted_agent1.FindAndDefeatZergling_4",  
                     "Which agent to run, as a python path to an Agent class.")
 flags.DEFINE_string("agent2", "pysc2.agents.random_agent.RandomAgent", 
                     "Which agent to run, as a python path to an Agent class.")
