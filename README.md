@@ -19,11 +19,13 @@ A reinforcement learning environment with adversary agents is proposed in this w
 6. battle.net + download maps 
 7. Download files from this folder
 * The above steps have been tested on Mac OSX/Windows 10/Ubuntu platforms. If you met installation problems, please google solutions. 
-** Currrntly, I provide three tests and two mini-game maps. 
+
+## Tips
+1. Currrntly, I provide three tests and two mini-game maps. 
 Map 1: FindAndDefeatDrones.SC2Map, single-player game. Please copy this file to the mini_games folder of the StarCtaft installation folder on your computer.  
 Map 2: FindAndDefeatDronesAA.SC2Map, double-player game. Please copy this file to the melee folder of the StarCtaft installation folder on your computer. 
-Then open the files mini_games.py and melee.py on your pysc2/maps folder, include the names of these two games therein. Then, the SC2 env will be adble to load the new games. 
-*** You can edit these two games by map editor, and follow the above steps to run your own games. 
+2. Then, open the files mini_games.py and melee.py on your pysc2/maps folder, include the names of these two games therein. Then, the SC2 env will be adble to load the new games. 
+3. You can edit these two games by map editor, and follow the above steps to run your own games. 
 
 # Running cases:
 1. python TestScripted_V1.py
